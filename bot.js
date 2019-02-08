@@ -57,9 +57,9 @@ if (message.content.toLowerCase().startsWith(prefix + `new`)) {
 if (message.content.toLowerCase().startsWith(prefix + `close`)) {
     if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`لا تستطيع استخدام الاوامر خارج التذكرة .`);
 
-    message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. سيتم الغاء الاغلاق خلال 10 ثواني.`)
+    message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`yes\`. سيتم الغاء الاغلاق خلال 10 ثواني.`)
     .then((m) => {
-      message.channel.awaitMessages(response => response.content === '/confirm', {
+      message.channel.awaitMessages(response => response.content === 'yes', {
         max: 1,
         time: 10000,
         errors: ['time'],
