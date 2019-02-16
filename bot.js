@@ -10,6 +10,10 @@ function clean(text) {
 
 const prefix = "/";
 
+const devs = ["406076958980571147"];
+const adminprefix = ["/t"];
+
+
 client.on("ready", () => {
   console.log("Vulnix | Logged in! Server count: ${client.guilds.size}");
   client.user.setGame(`Support Magic |${prefix}new`);
@@ -76,5 +80,66 @@ if (message.content.toLowerCase().startsWith(prefix + `close`)) {
 }
 
 });
+
+
+
+
+
+client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!devs.includes(message.author.id)) return;
+      
+  if (message.content.startsWith(adminprefix + "play")) {
+    client.user.setGame(argresult);
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+     if (message.content === ("leave")) {
+    message.guild.leave();        
+  } else  
+  if (message.content.startsWith(adminprefix + 'watch')) {
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'listen')) {
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'twitch')) {
+    client.user.setGame(argresult, "https://www.twitch.tv/idk");
+      message.channel.send(`**✅**`)
+  }
+  if (message.content.startsWith(adminprefix + 'name')) {
+  client.user.setUsername(argresult).then
+      message.channel.send(`Changing The Name To ..**${argresult}** `)
+} else
+if (message.content.startsWith(adminprefix + 'avatar')) {
+  client.user.setAvatar(argresult);
+    message.channel.send(`Changing The Avatar To :**${argresult}** `);
+}
+});
+
+
+
+
+
+
+
+
+
+client.on('message', message => {
+    if (message.content === adminprefix + "shelp") {
+        let helpEmbed = new Discord.RichEmbed()
+        .setTitle('**...اوامر الستريم...**')
+        .addField('name','لتغيير الاسم')
+        .addField('avatar','لتغير الصورة')
+        .addField('twitch','لوضع تويتش')
+        .addField('play', 'لوضع بلاينق')
+        .addField('watch','لوضع واتشينق')
+	.addField('listen','ليسين')
+        .setFooter('(,help) لاظهار الاوامر ')
+      message.channel.send(helpEmbed);
+    }
+});
+
 
 client.login(process.env.BOT_TOKEN);
